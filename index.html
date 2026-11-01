@@ -227,8 +227,8 @@ footer{padding-block:32px 48px;color:var(--muted);font-size:13px;display:flex;ju
   <section id="skills">
     <span class="mono">Toolbox</span><h2 style="margin-bottom:32px">Technical & soft skills</h2>
     <div class="skills">
-      <div><h4>Languages</h4><ul><li>Java</li><li>Python</li></ul></div>
-      <div><h4>Backend & frontend</h4><ul><li>Spring Boot</li><li>RESTful APIs</li><li>Microservices (basics)</li><li>Node.js</li><li>HTML</li><li>CSS3</li></ul></div>
+      <div><h4>Languages</h4><ul><li>Java</li><li>Python</li><li>Kotlin</li></ul></div>
+      <div><h4>Backend & frontend</h4><ul><li>Spring Boot</li><li>RESTful APIs</li><li>Microservices (basics)</li><li>Node.js</li><li>Jetpack Compose (Android)</li><li>HTML</li><li>CSS3</li></ul></div>
       <div><h4>Machine learning & AI</h4><ul><li>NLP</li><li>Deep Learning</li><li>CNN</li><li>TF-IDF</li><li>Scikit-learn</li><li>TensorFlow</li><li>Keras</li><li>PyTorch</li><li>Flask</li><li>Model training & evaluation</li></ul></div>
       <div><h4>Data & databases</h4><ul><li>PostgreSQL</li><li>MySQL</li><li>MongoDB (basics)</li><li>RDBMS</li></ul></div>
       <div><h4>Tools & platforms</h4><ul><li>Git</li><li>GitHub</li><li>Docker</li><li>Jenkins</li><li>GitHub Actions</li><li>Linux</li><li>VS Code</li><li>Android Studio</li></ul></div>
@@ -276,6 +276,12 @@ footer{padding-block:32px 48px;color:var(--muted);font-size:13px;display:flex;ju
 
 <script>
 const P=[
+ {id:"pallu",cat:["Generative AI","Full-Stack"],status:"Client project · Ready",live:true,title:"Pallu: Saree Virtual Try-On",
+  blurb:"AI try-on system for a real saree store: staff scan the sarees a shopper picks, the shopper scans a QR code at the mirror, and sees themselves wearing each one.",
+  kpi:[["Real","client store"],["3","surfaces: staff, mirror, admin"]],
+  tags:["Kotlin","Jetpack Compose","Android","Generative AI","Gemini via OpenRouter","QR flow","Web admin"],
+  pipe:["Staff scan saree tags","QR code","Shopper photo at mirror","Gemini image model","Try-on images"],
+  pts:["Staff use a phone to scan the tags of the sarees a shopper picks; the selection becomes a QR code the shopper scans at the mirror kiosk.","The mirror kiosk generates images of the shopper wearing each saree using a Gemini image model through OpenRouter.","Android app in Kotlin and Jetpack Compose, running on an Android tablet as the mirror instead of an expensive smart mirror, plus a web admin panel for the store.","Built for a store with several staff phones and several mirror tablets.","Demoed to the client, who liked it but asked for a better UI. Many of the store's customers aren't comfortable with tech, so I redesigned the whole interface to be simpler and cleaner while keeping every feature."]},
  {id:"senti",cat:["NLP","Backend"],status:"Internship",live:true,title:"Chatbot Sentiment Analysis",
   blurb:"Sentiment analysis system that classifies unstructured text and serves real-time predictions over REST.",
   kpi:[["96.2%","accuracy"],["85%","test coverage"]],
@@ -306,12 +312,6 @@ const P=[
   tags:["PyTorch","3D CNN","Mamba SSM","Gradio"],
   pipe:["CT volume","3D patch","3D CNN","Mamba head","Malignancy score"],
   pts:["Trained on ~6,000 nodules from LUNA25 with weighted cross-entropy.","Resolved NaN losses, AMP scaling bugs and class-collapse during training.","Gradio app for interactive inference."]},
- {id:"saree",cat:["Generative AI","Deep Learning"],status:"In development",live:true,title:"Saree Virtual Try-On Kiosk",
-  blurb:"In-store kiosk where shoppers scan a saree's QR code, snap a photo, and see themselves draped in it, powered by a self-hosted virtual try-on model instead of paid APIs.",
-  kpi:[["2","photos in, 1 try-on out"],["₹0","hosting target"]],
-  tags:["Diffusion","IDM-VTON / OOTDiffusion","LoRA","Pose estimation","Hugging Face Spaces","REST API"],
-  pipe:["Person photo","Pose + body segmentation","Saree warp","Fine-tuned diffusion","Try-on image"],
-  pts:["Fine-tuning an open-source virtual try-on diffusion model on saree images with LoRA, since off-the-shelf models are trained mostly on stitched Western garments.","Handles the parts of a saree (pallu, border, body) that a normal garment warp gets wrong.","Pretrained pose and body segmentation, then saree warping onto the body silhouette, then diffusion-based refinement.","Trained on free Colab/Kaggle GPUs and served from Hugging Face Spaces, so it has no per-call API cost.","I own the model and the <code>/tryon</code> API (person photo + saree photo in, composited image out). A teammate builds the kiosk UI, camera capture and QR-based saree selection."]},
  {id:"court",cat:["NLP"],status:"In progress",live:true,title:"AP Courts Voice Assistant",
   blurb:"Telugu + English voice assistant for AP High Court procedures and cause-list read-outs.",
   kpi:[["2","languages"]],
@@ -345,7 +345,7 @@ D.addEventListener("click",e=>{if(e.target===D)D.close()});
 
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 /* rotator */
-const roles=["> building REST APIs with Spring Boot","> training CNNs in PyTorch & TensorFlow","> shipping Flask services with CI/CD","> optimizing PostgreSQL queries","> solving DSA problems on LeetCode"];
+const roles=["> shipping an AI saree try-on app on Android","> building REST APIs with Spring Boot","> training CNNs in PyTorch & TensorFlow","> shipping Flask services with CI/CD","> optimizing PostgreSQL queries","> solving DSA problems on LeetCode"];
 const R=document.getElementById("rot");let ri=0,ci=0,del=false;
 if(reduce){R.textContent=roles[0]}else(function tick(){const w=roles[ri];R.textContent=w.slice(0,ci);
   if(!del&&ci<w.length){ci++;setTimeout(tick,45)}else if(!del){del=true;setTimeout(tick,1600)}
@@ -372,9 +372,9 @@ const CMD={
 Int. M.Tech CSE @ VIT-AP University (2022–2027) · CGPA 7.93
 Java · Spring Boot · Python · ML · Bengaluru, India`,
  projects:()=>P.map((p,i)=>`<span class="c">[${i+1}]</span> ${p.title} <span class="m">— ${p.kpi[0][0]} ${p.kpi[0][1]}</span>`).join("\n")+`\n<span class="m">tip: type</span> <span class="c">open 1</span>`,
- skills:()=>`<span class="k">lang</span>     Java, Python
+ skills:()=>`<span class="k">lang</span>     Java, Python, Kotlin
 <span class="k">backend</span>  Spring Boot, REST, Node.js, Microservices
-<span class="k">ml</span>       PyTorch, TensorFlow, Keras, Scikit-learn, NLP, CNN
+<span class="k">ml</span>       PyTorch, TensorFlow, Keras, Scikit-learn, NLP, CNN, GenAI
 <span class="k">data</span>     PostgreSQL, MySQL, MongoDB
 <span class="k">devops</span>   Git, Docker, Jenkins, GitHub Actions, Linux`,
  experience:()=>`<span class="g">AI Intern</span> · Remote · Jun–Aug 2024
